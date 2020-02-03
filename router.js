@@ -9,9 +9,12 @@ const SearchController = require("./controllers/SearchController");
 const authenticate = require("./middlewares/authenticate");
 
 const router = express.Router();
+// const swaggerJsDoc = require('swagger-jsdoc');
+// const swaggerUi = require('swagger-ui-express');
 
 //auth
 router.post("/login", AuthController.login);
+
 router.post("/register", AuthController.register);
 
 //follow
@@ -26,7 +29,16 @@ router.delete("/tweets/:id", authenticate, TweetController.delete);
 
 router.get("/user/tweets/:id?", authenticate, TweetController.list);
 
-//timeline
+
+/**
+ * @swagger
+ * /timeline:
+ *  get:
+ *    description : Use to get all user timeline
+ *    responses: 
+ *      '200':
+ *        description: A successful response 
+ */
 router.get("/timeline", authenticate, TimelineController.index);
 
 //search - This endpoint helps in searching for both tweets and users based on the intended search key
